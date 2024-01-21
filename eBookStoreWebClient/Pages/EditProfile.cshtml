@@ -1,0 +1,83 @@
+﻿@page
+@model Assignment2.eBookStore.Pages.EditProfileModel
+@{
+}
+<h1>Edit profile</h1>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="User.Id" hidden id="id"/>
+            <input asp-for="User.Password" hidden/>
+            <div class="form-group">
+                <label asp-for="User.Email" class="control-label"></label>
+                <input asp-for="User.Email" class="form-control" id="email"/>
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.FirstName" class="control-label"></label>
+                <input asp-for="User.FirstName" class="form-control" id="first"/>
+                <span asp-validation-for="User.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.MiddleName" class="control-label"></label>
+                <input asp-for="User.MiddleName" class="form-control" id="middle"/>
+                <span asp-validation-for="User.MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.LastName" class="control-label"></label>
+                <input asp-for="User.LastName" class="form-control" id="last"/>
+                <span asp-validation-for="User.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Source" class="control-label"></label>
+                <input asp-for="User.Source" class="form-control" id="source"/>
+                <span asp-validation-for="User.Source" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="UpdateBook()">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="http://localhost:3000">Back to List</a>
+</div>
+<script type="text/javascript">
+    function UpdateBook() {
+        var book = {
+            lastName: $('#last').val(),
+            firstName: $('#first').val(),
+            middleName: $('#middle').val(),
+            email: $('#email').val(),
+            source: $('#source').val()
+        };
+        var id = $('#id').val();
+        if (book) {
+            $.ajax({
+                url: "https://localhost:7087/api/user-management/users/" + id,
+                type: "PUT",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify(book),
+                success: function (result, status, xhr) {
+                   alert("Update profile success");
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr)
+                }
+            });
+        }
+    }
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

@@ -1,0 +1,88 @@
+﻿@page
+@model eBookStoreWebClient.Pages.Books.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form method="get">
+    <input type="text" name="keyword" placeholder="Search" />
+    <button type="submit">Search</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Advance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Royalty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].YtdSales)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Books[0].PublishedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Books) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher.PublisherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Advance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Royalty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YtdSales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishedDate)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<a asp-page="/Homes/AdminHomePage">Back to home</a>

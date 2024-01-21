@@ -1,0 +1,17 @@
+﻿@page
+@model eBookStoreWebClient.Pages.Homes.UserHomePageModel
+@{
+}
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+     
+        @{
+            var uid = HttpContext.Session.GetString("user");
+            if (!string.IsNullOrEmpty(uid))
+            {
+                <a asp-page="/Users/Edit" asp-route-id="@uid">Edit Info</a>
+                <a asp-page="/Users/Details" asp-route-id="@uid">Show Info</a>
+            }
+       }
+    </li>
+</ul>

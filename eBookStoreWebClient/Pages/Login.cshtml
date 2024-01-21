@@ -1,0 +1,13 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form class="login-form" asp-handler="Login" method="post">
+    <input type="text" placeholder="Enter your email" name="email" value="admin1@gmail.com" /><br />
+    <input type="password" placeholder="Enter your password" name="pass" value="admin123456" /> <br />
+    <button type="submit">Login</button>
+    <div class="msg-error" style="text-align:left;color:red;font-weight:bold">@ViewData["msg"]</div>
+</form>
